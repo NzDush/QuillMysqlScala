@@ -8,7 +8,7 @@ trait EmployeeModel {
 
   import ctx._
 
-  val acc = quote {
+  val employeeTable = quote {
     querySchema[Employee]("Employee", _.id -> "employee_id", _.name -> "name", _.address -> "address", _.salary -> "salary")
   }
 

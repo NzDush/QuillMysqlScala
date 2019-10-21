@@ -11,23 +11,51 @@ object EmployeeComponent extends MysqlConnection with EmployeeModel {
 //  def create: Unit ={
 //
 //  }
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   def insert(employees: List[Employee]): Future[List[Employee]] = {
-    val insert = quote {
-      liftQuery(employees).foreach(t => acc.insert(t))
+    val insertEmployees = quote {
+      liftQuery(employees).foreach(t => employeeTable.insert(t))
     }
-//    val str: List[String] = ctx.translate(insert)
-//    str.map(println)
+    val str: List[String] = ctx.translate(insertEmployees)
+    str.map(println)
 
-    ctx.run(insert).map(_ => employees)
+    val result = ctx.run(insertEmployees).map(_ => employees)
+    result
   }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  def viewAll: Future[List[Employee]] ={
+    val viewAllEmployees = quote{
+      employeeTable
+    }
+    val str = ctx.translate(viewAllEmployees)
+    println(str)
 
-//  def view: Unit ={
-//
-//  }
+    val result = ctx.run(viewAllEmployees)
+    result
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  def update(employee_id: Int, newEmployee: Employee): Future[Employee] ={
+    val updateEmployee = quote{
+      employeeTable.filter(employee => employee.id == lift(employee_id)).update(employee => employee.name -> lift(newEmployee.name),
+                                                                                employee => employee.address -> lift(newEmployee.address),
+                                                                                employee => employee.salary -> lift(newEmployee.salary))
+    }
+    val str = ctx.translate(updateEmployee)
+    println(str)
 
-//  def delete: Unit ={
-//
-//  }
+    val result = ctx.run(updateEmployee).map(_ => newEmployee)
+    result
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  def delete(employee_id: Int): Future[Employee.type] ={
+    val deleteEmployee = quote{
+      employeeTable.filter(employee => employee.id == lift(employee_id)).delete
+    }
+    val str = ctx.translate(deleteEmployee)
+    println(str)
+
+    val result = ctx.run(deleteEmployee).map(_ => Employee)
+    result
+  }
 
 }
