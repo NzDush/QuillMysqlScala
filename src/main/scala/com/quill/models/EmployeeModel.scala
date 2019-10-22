@@ -1,10 +1,10 @@
 package com.quill.models
 
-import com.quill.components.EmployeeComponent.ctx
+import com.quill.connection.MysqlConnection
 
-case class Employee(id: Int, name: String, address: String, salary: Option[Double])
+case class Employee(id: Int, name: String, address: String, salary: Double)
 
-trait EmployeeModel {
+trait EmployeeModel extends MysqlConnection{
 
   import ctx._
 
