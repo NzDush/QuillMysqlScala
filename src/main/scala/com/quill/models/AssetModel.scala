@@ -9,7 +9,12 @@ trait AssetModel extends MysqlConnection{
   import ctx._
 
   val assetTable = quote {
-    querySchema[Asset]("Asset", _.asset_id -> "asset_id", _.name -> "name", _.value -> "asset_value", _.employee_id -> "employee_id")
+    querySchema[Asset]("Asset",
+      _.asset_id -> "asset_id",
+      _.name -> "name",
+      _.value -> "asset_value",
+      _.employee_id -> "employee_id"
+    )
   }
 
 }

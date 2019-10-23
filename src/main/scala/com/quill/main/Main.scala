@@ -1,50 +1,48 @@
 package com.quill.main
 
-import com.quill.components.IOUtil
+import com.quill.components.IOComponent
 import com.quill.models.Employee
+import com.quill.controller.EmployeeController.{insertEmployee, viewAllEmployees, updateEmployeeViaId, deleteEmployeeViaId}
+import com.quill.controller.AssetController.employeeAssetsWithFilterSalary
+import com.quill.controller.ProjectController.employeeWithProjects
 import scala.concurrent.ExecutionContext.Implicits.global //need for onComplete{} method
 
-object Main extends App with IOUtil {
+object Main extends App with IOComponent {
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  import com.quill.dao.EmployeeDAO._
+//  insertEmployee(List(Employee(30, "aaa", "Panadura", 10), Employee(31, "bbb", "Kalutara", 10)))
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//  insert(List(Employee(8, "aaa", "Panadura", Some(10)), Employee(7, "bbb", "Kalutara", Some(10))))
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//  val result = viewAll
+//  val result = viewAllEmployees
 //  result.onComplete{
 //    case result =>  printList(result.get)
 //  }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//  update(4, Employee(4, "JKL", "Jaffna", Some(31)))
+//  updateEmployeeViaId(31, Employee(4, "JKL", "Jaffna", 31.5))
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//  delete(7)
+//  deleteEmployeeViaId(30)
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//  val result = employeesAssetFilterSalary(50)
+//  val result = employeeAssetsWithFilterSalary(50)
 //  result.onComplete{
 //    case result =>  printList(result.get)
 //  }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  val result = employeeProjects
+  val result = employeeWithProjects
   result.onComplete{
     case result =>  printList(result.get)
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  System.in.read();
-
-
+  System.in.read()
 
 }

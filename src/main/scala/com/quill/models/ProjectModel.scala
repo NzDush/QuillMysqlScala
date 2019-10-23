@@ -10,7 +10,12 @@ trait ProjectModel extends MysqlConnection{
   import ctx._
 
   val projectTable = quote {
-    querySchema[Project]("Project", _.id -> "project_id", _.name -> "name", _.start -> "start", _.end -> "end")
+    querySchema[Project]("Project",
+      _.id -> "project_id",
+      _.name -> "name",
+      _.start -> "start",
+      _.end -> "end"
+    )
   }
 
 }

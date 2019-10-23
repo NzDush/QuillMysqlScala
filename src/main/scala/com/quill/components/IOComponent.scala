@@ -1,6 +1,6 @@
 package com.quill.components
 
-trait IOUtil {
+trait IOComponent {
 
   def printList(args: List[_]): Unit = {
     args.foreach(println)

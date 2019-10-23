@@ -1,17 +1,16 @@
 package com.quill.dao
 
 import com.quill.connection.MysqlConnection
-import com.quill.models.{Asset, AssetModel, Employee, EmployeeModel, EmployeeProjects, EmployeeProjectsModel, Project, ProjectModel}
-
+import com.quill.models.{AssetModel, Employee, EmployeeModel, EmployeeProjectsModel, ProjectModel}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-object EmployeeDAO extends  AbstractDAO[Employee] with
-                            EmployeeModel with
-                            AssetModel with
-                            ProjectModel with
-                            EmployeeProjectsModel with
-                            MysqlConnection {
+trait EmployeeDAO extends AbstractDAO[Employee] with
+                          EmployeeModel with
+                          AssetModel with
+                          ProjectModel with
+                          EmployeeProjectsModel with
+                          MysqlConnection {
   import ctx._
 
   def insert(employees: List[Employee]): Future[List[Employee]] = {
@@ -50,45 +49,15 @@ object EmployeeDAO extends  AbstractDAO[Employee] with
     result
   }
 
-  def delete(employee_id: Int): Future[Employee] ={
+  def delete(employee_id: Int): Future[Int] ={
     val deleteEmployee = quote{
       employeeTable.filter(employee => employee.id == lift(employee_id)).delete
     }
     val str = ctx.translate(deleteEmployee)
     println(str)
 
-    val result = ctx.run(deleteEmployee).map(_ => Employee)
+    val result = ctx.run(deleteEmployee).map(_ => employee_id)
     result
   }
-
-  def employeesAssetFilterSalary(lowerSalaryLimit: Double): Future[List[(Employee, Option[Asset])]] ={
-    val customQuery = quote{
-      employeeTable.
-        leftJoin(assetTable).
-          on((employee, asset) => employee.id == asset.employee_id).
-        filter(employeeAsset => employeeAsset._1.salary > lift(lowerSalaryLimit))
-    }
-    val str = ctx.translate(customQuery)
-    println(str)
-
-    val result = ctx.run(customQuery)
-    result
-  }
-
-  def employeeProjects:Future[List[((Option[Employee], EmployeeProjects), Option[Project])]]={
-    val customQuery = quote{
-      employeeTable.
-        rightJoin(employeeProjectsTable).
-          on((employee, employee_project) => employee.id == employee_project.employee_id).
-        leftJoin(projectTable).
-          on((employee_project, project) => employee_project._2.project_id == project.id).sortBy(employee => employee._1._2.project_id)
-    }
-    val str = ctx.translate(customQuery)
-    println(str)
-
-    val result = ctx.run(customQuery)
-    result
-  }
-
 
 }

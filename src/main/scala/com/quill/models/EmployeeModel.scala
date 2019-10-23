@@ -9,7 +9,12 @@ trait EmployeeModel extends MysqlConnection{
   import ctx._
 
   val employeeTable = quote {
-    querySchema[Employee]("Employee", _.id -> "employee_id", _.name -> "name", _.address -> "address", _.salary -> "salary")
+    querySchema[Employee]("Employee",
+      _.id -> "employee_id",
+      _.name -> "name",
+      _.address -> "address",
+      _.salary -> "salary"
+    )
   }
 
 }
