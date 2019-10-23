@@ -1,15 +1,12 @@
 package com.quill.dao
 
 import com.quill.connection.MysqlConnection
-import com.quill.models.{AssetModel, Employee, EmployeeModel, EmployeeProjectsModel, ProjectModel}
+import com.quill.models.{Employee, EmployeeModel}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 trait EmployeeDAO extends AbstractDAO[Employee] with
                           EmployeeModel with
-                          AssetModel with
-                          ProjectModel with
-                          EmployeeProjectsModel with
                           MysqlConnection {
   import ctx._
 

@@ -5,6 +5,7 @@ import com.quill.models.Employee
 import com.quill.controller.EmployeeController.{insertEmployee, viewAllEmployees, updateEmployeeViaId, deleteEmployeeViaId}
 import com.quill.controller.AssetController.employeeAssetsWithFilterSalary
 import com.quill.controller.ProjectController.employeeWithProjects
+import com.quill.controller.ManufacturerController.{connectionBetweenEmployeeAssetManufacturer, connectionBetweenProjectEmployeeAssetManufacturer}
 import scala.concurrent.ExecutionContext.Implicits.global //need for onComplete{} method
 
 object Main extends App with IOComponent {
@@ -36,7 +37,21 @@ object Main extends App with IOComponent {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  val result = employeeWithProjects
+//  val result = employeeWithProjects
+//  result.onComplete{
+//    case result =>  printList(result.get)
+//  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//  val result = connectionBetweenEmployeeAssetManufacturer
+//  result.onComplete{
+//    case result =>  printList(result.get)
+//  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  val result = connectionBetweenProjectEmployeeAssetManufacturer
   result.onComplete{
     case result =>  printList(result.get)
   }

@@ -6,7 +6,7 @@ import scala.concurrent.Future
 
 object ProjectController extends ProjectDAO{
 
-  def employeeWithProjects: Future[List[((Option[Employee], EmployeeProjects), Option[Project])]] ={
+  def employeeWithProjects: Future[List[((Employee, EmployeeProjects), Project)]] ={
     val result = employeeProjects
     result
   }
