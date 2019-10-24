@@ -57,4 +57,28 @@ trait EmployeeDAO extends AbstractDAO[Employee] with
     result
   }
 
+  def groupByAddress: Future[List[(String, Long)]] ={
+    val group = quote{
+      employeeTable.groupBy(employee => employee.address).map{
+        case (address, id) => (address, id.size)
+      }
+    }
+    val str = ctx.translate(group)
+    println(str)
+
+    val result = ctx.run(group)
+    result
+  }
+
+  def sortBySalary: Future[List[Employee]] ={
+    val sort = quote{
+      employeeTable.sortBy(employee => employee.salary)
+    }
+    val str = ctx.translate(sort)
+    println(str)
+
+    val result = ctx.run(sort)
+    result
+  }
+
 }

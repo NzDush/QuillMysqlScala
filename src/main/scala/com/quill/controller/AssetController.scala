@@ -11,6 +11,4 @@ object AssetController extends AssetDAO{
     result
   }
 
-
-
 }

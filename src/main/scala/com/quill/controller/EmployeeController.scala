@@ -26,4 +26,14 @@ object EmployeeController extends EmployeeDAO{
     result
   }
 
+  def groupEmployeesByAddress: Future[List[(String, Long)]] ={
+    val result = groupByAddress
+    result
+  }
+
+  def sortEmployeeBySalary: Future[List[Employee]] ={
+    val result = sortBySalary
+    result
+  }
+
 }
