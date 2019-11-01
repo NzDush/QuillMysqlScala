@@ -4,7 +4,7 @@ import com.quill.components.IOComponent
 import com.quill.models.Employee
 import com.quill.controller.EmployeeController.{insertEmployee, viewAllEmployees, updateEmployeeViaId, deleteEmployeeViaId, groupEmployeesByAddress, sortEmployeeBySalary}
 import com.quill.controller.AssetController.employeeAssetsWithFilterSalary
-import com.quill.controller.ProjectController.employeeWithProjects
+import com.quill.controller.ProjectController.{employeeWithProjects, viewProjectsFromRawSql, viewProjectNamesFromRawSql}
 import com.quill.controller.ManufacturerController.{connectionBetweenEmployeeAssetManufacturer, connectionBetweenProjectEmployeeAssetManufacturer}
 import scala.concurrent.ExecutionContext.Implicits.global //need for onComplete{} method
 
@@ -51,10 +51,10 @@ object Main extends App with IOComponent {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  val result = connectionBetweenProjectEmployeeAssetManufacturer
-  result.onComplete{
-    case result =>  printList(result.get)
-  }
+//  val result = connectionBetweenProjectEmployeeAssetManufacturer
+//  result.onComplete{
+//    case result =>  printList(result.get)
+//  }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -66,6 +66,20 @@ object Main extends App with IOComponent {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //  val result = sortEmployeeBySalary
+//  result.onComplete{
+//    case result =>  printList(result.get)
+//  }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//    val result = viewProjectsFromRawSql
+//    result.onComplete{
+//      case result =>  printList(result.get)
+//    }
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//  val result = viewProjectNamesFromRawSql
 //  result.onComplete{
 //    case result =>  printList(result.get)
 //  }

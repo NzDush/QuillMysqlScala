@@ -2,7 +2,6 @@ package com.quill.dao
 
 import com.quill.connection.MysqlConnection
 import com.quill.models.{Asset, AssetModel, Employee, EmployeeModel, EmployeeProjects, EmployeeProjectsModel, Manufacturer, ManufacturerModel, Project, ProjectModel}
-
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 

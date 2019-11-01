@@ -25,20 +25,20 @@ trait AssetDAO extends  //AbstractDAO[Asset] with
     result
   }
 
-  //  def insert(asset: List[Asset]): Future[List[Asset]] ={
-  //
-  //  }
-  //
-  //  def viewAll: Future[List[Asset]] ={
-  //
-  //  }
-  //
-  //  def update(asset_id: Int, newAsset: Asset): Future[Asset]={
-  //
-  //  }
-  //
-  //  def delete(asset_id: Int): Future[Int]={
-  //
-  //  }
+//    def insert(asset: List[Asset]): Future[List[Asset]] ={
+//
+//    }
+//
+//    def viewAll: Future[List[Asset]] ={
+//
+//    }
+//
+//    def update(asset_id: Int, newAsset: Asset): Future[Asset]={
+//
+//    }
+//
+//    def delete(asset_id: Int): Future[Int]={
+//
+//    }
 
 }

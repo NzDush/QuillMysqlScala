@@ -1,7 +1,7 @@
 package com.quill.dao
 
 import com.quill.connection.MysqlConnection
-import com.quill.models.{Employee, EmployeeModel, EmployeeProjects, EmployeeProjectsModel, Project, ProjectModel}
+import com.quill.models.{Employee, EmployeeModel, EmployeeProjects, EmployeeProjectsModel, Project, ProjectModel, Project_Partial, Project_True}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -24,6 +24,28 @@ trait ProjectDAO extends  //AbstractDAO[Project] with
     println(str)
 
     val result = ctx.run(customQuery)
+    result
+  }
+
+  def getProjectsFromSql: Future[List[Project_True]] ={
+    val rawQuery = quote(
+      infix"""SELECT * FROM Project""".as[Query[Project_True]]
+    )
+    val str = ctx.translate(rawQuery)
+    println(str)
+
+    val result = ctx.run(rawQuery)
+    result
+  }
+
+  def getProjectNamesFromSql: Future[List[Project_Partial]] ={
+    val rawQuery = quote(
+        infix"""SELECT project_id, name FROM Project""".as[Query[Project_Partial]]
+    )
+    val str = ctx.translate(rawQuery)
+    println(str)
+
+    val result = ctx.run(rawQuery)
     result
   }
 
