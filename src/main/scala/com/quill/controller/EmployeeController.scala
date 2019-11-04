@@ -6,7 +6,7 @@ import scala.concurrent.Future
 
 object EmployeeController extends EmployeeDAO{
 
-  def insertEmployee(employees: List[Employee]): Future[List[Employee]] ={
+  def insertEmployees(employees: List[Employee]): Future[List[Employee]] ={
     val result = insert(employees)
     result
   }
