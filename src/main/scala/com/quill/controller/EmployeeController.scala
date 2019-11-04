@@ -1,7 +1,7 @@
 package com.quill.controller
 
 import com.quill.dao.EmployeeDAO
-import com.quill.models.{Asset, Employee, EmployeeProjects, Project}
+import com.quill.models.Employee
 import scala.concurrent.Future
 
 object EmployeeController extends EmployeeDAO{
