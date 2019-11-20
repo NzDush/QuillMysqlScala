@@ -1,7 +1,7 @@
 package com.quill.dao
 
 import com.quill.connection.MysqlConnection
-import com.quill.models.{Asset, AssetModel, Employee, EmployeeModel, EmployeeProjects, EmployeeProjectsModel, Manufacturer, ManufacturerModel, Project, ProjectModel}
+import com.quill.models.{Assets, AssetModel, Employee, EmployeeModel, EmployeeProjects, EmployeeProjectsModel, Manufacturer, ManufacturerModel, Project, ProjectModel}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -14,7 +14,7 @@ trait ManufacturerDAO extends //AbstractDAO[Employee] with
                               MysqlConnection {
   import ctx._
 
-  def employeeAssetManufacturer: Future[List[((Employee, Asset), Manufacturer)]] ={
+  def employeeAssetManufacturer: Future[List[((Employee, Assets), Manufacturer)]] ={
     val customQuery = quote{
       employeeTable.
         join(assetTable).
@@ -29,7 +29,7 @@ trait ManufacturerDAO extends //AbstractDAO[Employee] with
     result
   }
 
-  def projectEmployeeAssetManufacturer: Future[List[((((Project, EmployeeProjects), Employee), Asset), Manufacturer)]] ={
+  def projectEmployeeAssetManufacturer: Future[List[((((Project, EmployeeProjects), Employee), Assets), Manufacturer)]] ={
     val customQuery = quote{
       projectTable.
         join(employeeProjectsTable).

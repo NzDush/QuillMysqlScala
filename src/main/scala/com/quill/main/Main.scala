@@ -8,7 +8,9 @@ import com.quill.controller.ProjectController.{employeeWithProjects, viewProject
 import com.quill.controller.ManufacturerController.{connectionBetweenEmployeeAssetManufacturer, connectionBetweenProjectEmployeeAssetManufacturer}
 import scala.concurrent.ExecutionContext.Implicits.global //need for onComplete{} method
 
-object Main extends App with IOComponent {
+object Main extends App with
+                    IOComponent {
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //  insertEmployees(List(Employee(30, "aaa", "Panadura", 10), Employee(31, "bbb", "Kalutara", 10)))

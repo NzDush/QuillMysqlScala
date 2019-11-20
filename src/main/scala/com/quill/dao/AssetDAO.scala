@@ -1,7 +1,7 @@
 package com.quill.dao
 
 import com.quill.connection.MysqlConnection
-import com.quill.models.{Asset, AssetModel, Employee, EmployeeModel}
+import com.quill.models.{Assets, AssetModel, Employee, EmployeeModel}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
@@ -11,12 +11,12 @@ trait AssetDAO extends  //AbstractDAO[Asset] with
                         MysqlConnection {
   import ctx._
 
-  def employeeAssetFilterSalary(lowerSalaryLimit: Double): Future[List[(Employee, Asset)]] ={
+  def employeeAssetFilterSalary(lowerSalaryLimit: Double): Future[List[(Employee, Assets)]] ={
     val customQuery = quote{
       employeeTable.
-        join(assetTable).
-        on((employee, asset) => employee.id == asset.employee_id).
-        filter(employeeAsset => employeeAsset._1.salary > lift(lowerSalaryLimit))
+        join(assetTable)
+        .on((employee, asset) => employee.id == asset.employee_id)
+        .filter(employeeAsset => employeeAsset._1.salary > lift(lowerSalaryLimit))
     }
     val str = ctx.translate(customQuery)
     println(str)
