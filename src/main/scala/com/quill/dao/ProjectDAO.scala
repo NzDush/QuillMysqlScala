@@ -19,6 +19,10 @@ trait ProjectDAO extends  //AbstractDAO[Project] with
           on((employee, employeeHasProject) => employee.id == employeeHasProject.employee_id).
         join(projectTable).
           on((employee_employeeHasProject, project) => employee_employeeHasProject._2.project_id == project.id).sortBy(employee => employee._1._2.project_id)
+//        .filter(tableCombination  => tableCombination match {
+//          case ((employee, employeeProjects), project) => employee.salary > lift(100)
+//        })
+
     }
     val str = ctx.translate(customQuery)
     println(str)
